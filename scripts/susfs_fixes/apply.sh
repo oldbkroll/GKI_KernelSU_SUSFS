@@ -33,7 +33,9 @@ case "$KSU_VARIANT" in
   "Official")
     cd ./KernelSU
     cp "$SUSFS4KSU"/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./
-    patch -p1 --forward < 10_enable_susfs_for_ksu.patch || true
+    # Stop before modifying sources if the upstream KSU patch is incompatible.
+    patch --batch -p1 --forward --dry-run < 10_enable_susfs_for_ksu.patch
+    patch --batch -p1 --forward < 10_enable_susfs_for_ksu.patch
 
     cd ..
     ;;

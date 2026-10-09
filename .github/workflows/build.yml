@@ -539,7 +539,11 @@ jobs:
           variant_input="${{ inputs.ksu_variant }}"
 
           case "$variant_input" in
-            "Official"|"BakaSU")
+            "Official")
+              # Temporary compatible upstream revision for the SUSFS KSU patch.
+              BRANCH="-s 08a3b087e49227c8a6731c5f1114998b5e25255b"
+              ;;
+            "BakaSU")
               BRANCH="-s main"
               ;;
             "SukiSU")
